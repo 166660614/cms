@@ -12,11 +12,17 @@ class AlipayController extends Controller
     //
 
 
-    public $app_id = '2016092200571750';
-    public $gate_way = 'https://openapi.alipaydev.com/gateway.do';
-    public $notify_url = 'http://laravel.52self.cn/pay/alipay/notify';
+    public $app_id;
+    public $gate_way;
+    public $notify_url;
+    public $snyc_url;
     public $rsaPrivateKeyFilePath = './key/priv.key';
-
+    public function __construct(){
+        $this->app_id = env('ALIPAY_APPID');
+        $this->gate_way = env('ALIPAY_GATEWAY');
+        $this->notify_url = env('ALIPAY_NOTIFY_URL');
+        $this->snyc_url = env('ALIPAY_SNYC_URL');
+    }
 
     /**
      * 请求订单服务 处理订单逻辑
@@ -44,6 +50,7 @@ class AlipayController extends Controller
             'timestamp'   => date('Y-m-d H:i:s'),
             'version'   => '1.0',
             'notify_url'   => $this->notify_url,
+            'return_url' => $this->snyc_url,
             'biz_content'   => json_encode($bizcont),
         ];
 
@@ -127,5 +134,8 @@ class AlipayController extends Controller
 
 
         return $data;
+    }
+    function  snyc_url(){
+        echo 111;
     }
 }

@@ -44,4 +44,5 @@ Route::post('/order/cancel','Order\OrderController@ordercanno')->middleware('che
 //支付页
 Route::get('/pay/alipay/test','Pay\AlipayController@test');
 Route::get('/pay/order/{oid}','Pay\IndexController@order')->middleware('check.login.token');
-Route::post('/pay/alipay/notify','Pay\AlipayController@notify');
+Route::post('/pay/alipay/notify','Pay\AlipayController@notify');//异步通知
+Route::post('/pay/alipay/snyc','Pay\AlipayController@snyc');//同步通知

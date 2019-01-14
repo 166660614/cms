@@ -44,6 +44,7 @@
                     <li><a href="/users/loginout">退出</a></li>
                     @else
                     <li><a href="/users/login">登录</a></li>
+                    <li><a href="/users/register">注册</a></li>
                     @endif
                 </ul>
             </div><!--/.nav-collapse -->
