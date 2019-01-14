@@ -135,7 +135,7 @@ class AlipayController extends Controller
 
         return $data;
     }
-    function  snyc_url(){
-        echo 111;
+    function  snyc(){
+        return $data;
     }
 }
