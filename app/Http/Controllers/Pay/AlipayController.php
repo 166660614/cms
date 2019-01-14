@@ -13,7 +13,7 @@ class AlipayController extends Controller
 
 
     public $app_id = '2016092200571750';
-    public $gate_way = 'https://laravel.52self.cn/gateway.do';
+    public $gate_way = 'https://openapi.alipaydev.com/gateway.do';
     public $notify_url = 'http://laravel.52self.cn/pay/alipay/notify';
     public $rsaPrivateKeyFilePath = './key/priv.key';
 
