@@ -64,14 +64,10 @@ class AlipayController extends Controller
     }
 
     protected function sign($data) {
-
         $priKey = file_get_contents($this->rsaPrivateKeyFilePath);
         $res = openssl_get_privatekey($priKey);
-
         ($res) or die('您使用的私钥格式错误，请检查RSA私钥配置');
-
         openssl_sign($data, $sign, $res, OPENSSL_ALGO_SHA256);
-
         if(!$this->checkEmpty($this->rsaPrivateKeyFilePath)){
             openssl_free_key($res);
         }

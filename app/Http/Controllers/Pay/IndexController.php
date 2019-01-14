@@ -19,7 +19,7 @@ class IndexController extends Controller
         }
 
         //调起支付宝支付
-
+        header('Refresh:2;url=/pay/alipay/test');
         //支付成功 修改支付时间
         OrderModel::where(['order_id'=>$oid])->update(['pay_status'=>2,'order_status'=>3]);
         //增加消费积分 ...
