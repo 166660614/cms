@@ -150,11 +150,11 @@ class AlipayController extends Controller
         $log_str = '>>>> '.date('Y-m-d H:i:s') . $data . "<<<<\n\n";
         //记录日志
         file_put_contents('logs/alipay.log',$log_str,FILE_APPEND);
-        //验
+        //
         $res = $this->verify($_POST);
+        file_put_contents('logs/alipay.log',$res,FILE_APPEND);
         $log_str = '>>>> ' . date('Y-m-d H:i:s');
         if($res === false){
-
             //记录日志 验签失败
             $log_str .= " Sign Failed!<<<<< \n\n";
             file_put_contents('logs/alipay.log',$log_str,FILE_APPEND);
@@ -177,8 +177,8 @@ class AlipayController extends Controller
                 'plat_oid'      => $_POST['trade_no'],      //支付宝订单号
                 'plat'          => 1,      //平台编号 1支付宝 2微信 3第三方
             ];
-            $res=OrderModel::where(['order_id'=>$order_id])->update($info);
-            file_put_contents('logs/alipay.log',$res,FILE_APPEND);
+            $res2=OrderModel::where(['order_id'=>$order_id])->update($info);
+            file_put_contents('logs/alipay.log',$res2,FILE_APPEND);
 
         }
         //处理订单逻辑
