@@ -15,7 +15,7 @@
             <td>{{date('Y-m-d H:i:s',$v['order_add_time'])}}</td>
             <td>
                 @if($v['order_status']==1)
-                <a class="btn btn-success" href="/pay/alipay/{{$v['order_id']}}">立即支付</a>
+                <a class="btn btn-success" href="/pay/alipay/order/{{$v['order_id']}}">立即支付</a>
                 <a href="" class="orderno btn btn-danger">取消订单</a>
                 @elseif($v['order_status']==3)
                 <a class="btn btn-success" style="cursor:default" >已支付</a>
