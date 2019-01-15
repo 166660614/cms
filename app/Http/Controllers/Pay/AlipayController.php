@@ -17,6 +17,7 @@ class AlipayController extends Controller
     public $notify_url;
     public $snyc_url;
     public $rsaPrivateKeyFilePath = './key/priv.key';
+    public $aliPubKey = './key/pub.key';
     public function __construct(){
         $this->app_id = env('ALIPAY_APPID');
         $this->gate_way = env('ALIPAY_GATEWAY');
@@ -36,7 +37,7 @@ class AlipayController extends Controller
         $bizcont = [
             'subject'           => 'ancsd'. mt_rand(1111,9999).str_random(6),
             'out_trade_no'      => 'oid'.date('YmdHis').mt_rand(1111,2222),
-            'total_amount'      => 0.01,
+            'total_amount'      => 999.99,
             'product_code'      => 'QUICK_WAP_WAY',
 
         ];
@@ -48,7 +49,7 @@ class AlipayController extends Controller
             'charset'   => 'utf-8',
             'sign_type'   => 'RSA2',
             'timestamp'   => date('Y-m-d H:i:s'),
-            'version'   => '1.0',
+            'version'   => '6.6',
             'notify_url'   => $this->notify_url,
             'return_url' => $this->snyc_url,
             'biz_content'   => json_encode($bizcont),
@@ -136,6 +137,28 @@ class AlipayController extends Controller
         return $data;
     }
     public function  snyc(){
-       print_r($_GET);exit;
+       //print_r($_GET);exit;
+       //验签 支付宝的公钥
+        if(!$this->verify($_GET)){
+            echo "交易失败";
+        }
+    }
+    public function verify($params){
+        $sign = $params['sign'];
+        $params['sign_type'] = null;
+        $params['sign'] = null;
+        $pubKey = "-----BEGIN PUBLIC KEY-----\n" .
+            wordwrap($pubKey, 64, "\n", true) .
+            "\n-----END PUBLIC KEY-----";
+        //转换为openssl格式密钥
+        $res = openssl_get_publickey($pubKey);
+        ($res) or die('支付宝RSA公钥错误。请检查公钥文件格式是否正确');
+        //调用openssl内置方法验签，返回bool值
+
+        $result = (openssl_verify($this->getSignContent($params), base64_decode($sign), $res, OPENSSL_ALGO_SHA256)===1);
+        openssl_free_key($res);
+
+        return $result;
+
     }
 }
