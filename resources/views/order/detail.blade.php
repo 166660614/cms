@@ -3,6 +3,7 @@
     <h1>订单列表</h1>
     <table class="table table-border" border="1">
         <tr>
+            {csrf_field()}}
             <td>订单号</td>
             <td>订单总价</td>
             <td>添加时间</td>
