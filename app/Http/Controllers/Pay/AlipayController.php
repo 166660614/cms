@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use GuzzleHttp\Client;
-
+use App\Model\OrderModel;
 class AlipayController extends Controller
 {
     //
@@ -31,13 +31,13 @@ class AlipayController extends Controller
      */
 
 
-    public function test()
+    public function test($order_id)
     {
-
+        $orderInfo=OrderModel::where(['order_id'=>$order_id])->first();
         $bizcont = [
             'subject'           => 'ancsd'. mt_rand(1111,9999).str_random(6),
-            'out_trade_no'      => 'oid'.date('YmdHis').mt_rand(1111,2222),
-            'total_amount'      => 999.99,
+            'out_trade_no'      =>$orderInfo['order_number'],
+            'total_amount'      => $orderInfo['order_amount'],
             'product_code'      => 'QUICK_WAP_WAY',
 
         ];
@@ -161,7 +161,9 @@ class AlipayController extends Controller
             $log_str .= " Sign OK!<<<<< \n\n";
             file_put_contents('/logs/alipay.log',$log_str,FILE_APPEND);
         }
-
+        $updata=['order_status'=>3,'pay_status'=>2,'is_delete'=>2];
+        $upwhere=['order_number'=>$data['order_number']];
+        OrderModel::where($upwhere)->updata($updata);
         //处理订单逻辑
         //$this->dealOrder($_POST);
         echo 'success';
