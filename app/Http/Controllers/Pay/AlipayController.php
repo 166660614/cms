@@ -142,6 +142,30 @@ class AlipayController extends Controller
         if(!$this->verify($_GET)){
             echo "交易失败";
         }
+        echo "交易成功";
+    }
+    public function aliNotify()
+    {
+
+        $data = json_encode($_POST);
+        $log_str = '>>>> '.date('Y-m-d H:i:s') . $data . "<<<<\n\n";
+        //记录日志
+        file_put_contents('logs/alipay.log',$log_str,FILE_APPEND);
+        //验签
+        $res = $this->verify($_POST);
+        $log_str = '>>>> ' . date('Y-m-d H:i:s');
+        if($res === false){
+            //记录日志 验签失败
+            $log_str .= " Sign Failed!<<<<< \n\n";
+            file_put_contents('logs/alipay.log',$log_str,FILE_APPEND);
+        }else{
+            $log_str .= " Sign OK!<<<<< \n\n";
+            file_put_contents('logs/alipay.log',$log_str,FILE_APPEND);
+        }
+
+        //处理订单逻辑
+        //$this->dealOrder($_POST);
+        echo 'success';
     }
     public function verify($params){
         $sign = $params['sign'];
