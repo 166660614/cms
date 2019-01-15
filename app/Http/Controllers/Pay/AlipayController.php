@@ -161,7 +161,7 @@ class AlipayController extends Controller
             $log_str .= " Sign OK!<<<<< \n\n";
             file_put_contents('/logs/alipay.log',$log_str,FILE_APPEND);
         }
-        if($_POST['trade_status'=='TRADE_SUCCESS']){
+       /* if($_POST['trade_status'=='TRADE_SUCCESS']){
             //更新订单状态
             $order_id=$_POST['out_trade_no'];//商户订单号
             $info=[
@@ -171,7 +171,7 @@ class AlipayController extends Controller
                 'plat'=>1,//平台编号 1支付宝 2微信
             ];
             OrderModel::where('order_id=>$order_id')->update($info);
-        }
+        }*/
         //处理订单逻辑
         //$this->dealOrder($_POST);
         echo 'success';
