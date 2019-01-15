@@ -41,7 +41,7 @@ class OrderController extends Controller
     //订单页
     public function orderdetail(){
         $user_id=session()->get('user_id');
-        $orderData=OrderModel::where(['user_id'=>$user_id])->get();
+        $orderData=OrderModel::where(['user_id'=>$user_id,'is_delete'=>1])->get();
         $orderlist=[
           'orderData'=>$orderData,
         ];
@@ -50,7 +50,7 @@ class OrderController extends Controller
     //取消订单
     public function ordercanno(Request $request){
         $order_id=$request->input('order_id');
-        $res=OrderModel::where(['order_id'=>$order_id])->delete();
+        $res=OrderModel::where(['order_id'=>$order_id])->update(['is_delete'=>2]);
         if($res){
             $response=[
               'msg'=>"订单已取消",
@@ -64,8 +64,5 @@ class OrderController extends Controller
             ];
             return $response;
         }
-    }
-    public function test(){
-        
     }
 }
