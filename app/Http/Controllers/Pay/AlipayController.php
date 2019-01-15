@@ -147,6 +147,8 @@ class AlipayController extends Controller
         $sign = $params['sign'];
         $params['sign_type'] = null;
         $params['sign'] = null;
+        //读取公钥文件
+        $pubKey = file_get_contents($this->aliPubKey);
         $pubKey = "-----BEGIN PUBLIC KEY-----\n" .
             wordwrap($pubKey, 64, "\n", true) .
             "\n-----END PUBLIC KEY-----";
