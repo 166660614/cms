@@ -24,7 +24,7 @@ class OrderController extends Controller
         ];
         $res=OrderModel::insertGetId($data);
         if($res){
-            CartModel::where(['user_id'=>$user_id,'cart_id'=>$cart_id])->delete();
+            CartModel::where(['user_id'=>$user_id,'cart_id'=>$cart_id])->update(['is_delete'=>2]);
             $response=[
                 'msg'=>'下单成功',
                 'error'=>'0',

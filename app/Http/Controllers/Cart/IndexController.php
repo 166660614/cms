@@ -14,7 +14,7 @@ class IndexController extends Controller{
     public function index(Request $request){
             $user_id=session()->get('user_id');
             if(!empty($user_id)){
-                $cart_detail = CartModel::where(['user_id'=>$user_id])->get()->toArray();
+                $cart_detail = CartModel::where(['user_id'=>$user_id,'is_delete'=>1])->get()->toArray();
                 //print_r($cart_detail);exit;
                 if(empty($cart_detail)){
                     echo '购物车是空的';
@@ -111,7 +111,7 @@ class IndexController extends Controller{
     public function cartdelete2(Request $request){
         $cart_id=$request->input('cart_id');
         $user_id=session()->get('user_id');
-        $res=CartModel::where(['cart_id'=>$cart_id,'user_id'=>$user_id])->delete();
+        $res=CartModel::where(['cart_id'=>$cart_id,'user_id'=>$user_id])->update(['is_delete'=>2]);
         if($res){
             $response=[
                 'error'=>0,
