@@ -144,7 +144,7 @@ class AlipayController extends Controller
         }
         echo "交易成功";
     }
-    public function aliNotify()
+    public function notify()
     {
 
         $data = json_encode($_POST);
