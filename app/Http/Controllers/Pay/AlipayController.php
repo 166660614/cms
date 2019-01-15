@@ -161,7 +161,6 @@ class AlipayController extends Controller
             $log_str .= " Sign OK!<<<<< \n\n";
             file_put_contents('logs/alipay.log',$log_str,FILE_APPEND);
         }
-        echo 1;exit;
         if($_POST['trade_status'=='TRADE_SUCCESS']){
             //更新订单状态
             $order_id=$_POST['out_trade_no'];//商户订单号
