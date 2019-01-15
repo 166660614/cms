@@ -154,24 +154,18 @@ class AlipayController extends Controller
         $res = $this->verify($_POST);
         $log_str = '>>>> ' . date('Y-m-d H:i:s');
         if($res === false){
+
             //记录日志 验签失败
             $log_str .= " Sign Failed!<<<<< \n\n";
             file_put_contents('logs/alipay.log',$log_str,FILE_APPEND);
         }else{
+
             $log_str .= " Sign OK!<<<<< \n\n";
             file_put_contents('logs/alipay.log',$log_str,FILE_APPEND);
         }
-        /*if($_POST['trade_status'=='TRADE_SUCCESS']){
-            //更新订单状态
-            $order_id=$_POST['out_trade_no'];//商户订单号
-            $info=[
-                'pay_status'=>2,//1未支付 2已支付
-                'order_amount'=>$_POST['total_amount']*100,//支付金额
-                'plat_oid'=>$_POST['trade_no'],//支付宝订单号
-                'plat'=>1,//平台编号 1支付宝 2微信
-            ];
-            OrderModel::where(['order_id'=>$order_id])->update($info);
-        }*/
+
+
+
         //验证订单交易状态
         if($_POST['trade_status']=='TRADE_SUCCESS'){
             //更新订单状态
@@ -183,8 +177,9 @@ class AlipayController extends Controller
                 'plat_oid'      => $_POST['trade_no'],      //支付宝订单号
                 'plat'          => 1,      //平台编号 1支付宝 2微信 3第三方
             ];
+            $res=OrderModel::where(['order_id'=>$order_id])->update($info);
+            file_put_contents('logs/alipay.log',$res,FILE_APPEND);
 
-            OrderModel::where(['order_id'=>$order_id])->update($info);
         }
         //处理订单逻辑
         //$this->dealOrder($_POST);
