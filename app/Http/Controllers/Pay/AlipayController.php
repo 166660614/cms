@@ -49,7 +49,7 @@ class AlipayController extends Controller
             'charset'   => 'utf-8',
             'sign_type'   => 'RSA2',
             'timestamp'   => date('Y-m-d H:i:s'),
-            'version'   => '6.6',
+            'version'   => '1.0',
             'notify_url'   => $this->notify_url,
             'return_url' => $this->snyc_url,
             'biz_content'   => json_encode($bizcont),
@@ -161,7 +161,7 @@ class AlipayController extends Controller
             $log_str .= " Sign OK!<<<<< \n\n";
             file_put_contents('/logs/alipay.log',$log_str,FILE_APPEND);
         }
-       /* if($_POST['trade_status'=='TRADE_SUCCESS']){
+        if($_POST['trade_status'=='TRADE_SUCCESS']){
             //更新订单状态
             $order_id=$_POST['out_trade_no'];//商户订单号
             $info=[
@@ -171,7 +171,7 @@ class AlipayController extends Controller
                 'plat'=>1,//平台编号 1支付宝 2微信
             ];
             OrderModel::where('order_id=>$order_id')->update($info);
-        }*/
+        }
         //处理订单逻辑
         //$this->dealOrder($_POST);
         echo 'success';
