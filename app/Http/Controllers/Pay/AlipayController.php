@@ -170,7 +170,7 @@ class AlipayController extends Controller
                 'plat_oid'=>$_POST['trade_no'],//支付宝订单号
                 'plat'=>1,//平台编号 1支付宝 2微信
             ];
-            OrderModel::where('order_id=>$order_id')->update($info);
+            OrderModel::where(['order_id'=>$order_id])->update($info);
         }
         //处理订单逻辑
         //$this->dealOrder($_POST);
