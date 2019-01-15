@@ -146,12 +146,12 @@ class AlipayController extends Controller
     }
     public function notify()
     {
-
+        echo 1;die;
         $data = json_encode($_POST);
         $log_str = '>>>> '.date('Y-m-d H:i:s') . $data . "<<<<\n\n";
         //记录日志
         file_put_contents('/logs/alipay.log',$log_str,FILE_APPEND);
-        //验签
+        //验
         $res = $this->verify($_POST);
         $log_str = '>>>> ' . date('Y-m-d H:i:s');
         if($res === false){
