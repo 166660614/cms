@@ -156,10 +156,10 @@ class AlipayController extends Controller
         if($res === false){
             //记录日志 验签失败
             $log_str .= " Sign Failed!<<<<< \n\n";
-            file_put_contents('/logs/alipay.log',$log_str,FILE_APPEND);
+            file_put_contents('logs/alipay.log',$log_str,FILE_APPEND);
         }else{
             $log_str .= " Sign OK!<<<<< \n\n";
-            file_put_contents('/logs/alipay.log',$log_str,FILE_APPEND);
+            file_put_contents('logs/alipay.log',$log_str,FILE_APPEND);
         }
         echo 1;exit;
         if($_POST['trade_status'=='TRADE_SUCCESS']){
