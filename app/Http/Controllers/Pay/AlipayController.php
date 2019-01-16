@@ -169,7 +169,7 @@ class AlipayController extends Controller
         //验证订单交易状态
         if($_POST['trade_status']=='TRADE_SUCCESS'){
             //更新订单状态
-            $order_id = $_POST['out_trade_no'];     //商户订单号
+            $order_number = $_POST['out_trade_no'];     //商户订单号
             $info = [
                 'pay_status'        => 2,       //支付状态  0未支付 1已支付
                 'order_amount'    => $_POST['total_amount'] * 100,    //支付金额
@@ -178,8 +178,8 @@ class AlipayController extends Controller
                 'plat'          => 1,      //平台编号 1支付宝 2微信 3第三方
             ];
             //file_put_contents('logs/alipay.log',$info.'\n\n',FILE_APPEND);
-            $res2=OrderModel::where(['order_id'=>$order_id])->update($info);
-            file_put_contents('logs/alipay.log',$res2.'\n\n',FILE_APPEND);
+            $res2=OrderModel::where(['order_number'=>$order_number])->update($info);
+            //file_put_contents('logs/alipay.log',$res2.'\n\n',FILE_APPEND);
 
         }
         //处理订单逻辑
