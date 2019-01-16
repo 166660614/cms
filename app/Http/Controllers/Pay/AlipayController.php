@@ -34,6 +34,14 @@ class AlipayController extends Controller
     public function test($order_id)
     {
         $orderInfo=OrderModel::where(['order_id'=>$order_id])->first();
+        //判断订单是否已被支付
+        if($orderInfo['pay_status']==2){
+            die("订单已支付，请勿重复支付");
+        }
+        //判断订单是否已被删除
+        if($orderInfo['is_delete']==2){
+            die("订单已被删除，无法支付");
+        }
         $bizcont = [
             'subject'           => 'ancsd'. mt_rand(1111,9999).str_random(6),
             'out_trade_no'      =>$orderInfo['order_number'],
