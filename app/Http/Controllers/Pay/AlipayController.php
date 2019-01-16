@@ -177,9 +177,9 @@ class AlipayController extends Controller
                 'plat_oid'      => $_POST['trade_no'],      //支付宝订单号
                 'plat'          => 1,      //平台编号 1支付宝 2微信 3第三方
             ];
-            file_put_contents('logs/alipay.log',$info,FILE_APPEND);
+            //file_put_contents('logs/alipay.log',$info.'\n\n',FILE_APPEND);
             $res2=OrderModel::where(['order_id'=>$order_id])->update($info);
-            file_put_contents('logs/alipay.log',$res2,FILE_APPEND);
+            file_put_contents('logs/alipay.log',$res2.'\n\n',FILE_APPEND);
 
         }
         //处理订单逻辑
