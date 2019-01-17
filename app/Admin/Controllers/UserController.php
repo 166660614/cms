@@ -26,4 +26,21 @@ class UserController extends Controller{
         });
         return $grid;
     }
+    public function create(Content $content)
+    {
+        return $content
+            ->header('Create')
+            ->description('description')
+            ->body($this->form());
+    }
+    protected function form()
+    {
+        $form = new Form(new Info());
+
+        $form->text('nick_name', '昵称');
+        $form->text('age', '年龄');
+        $form->email('email', 'Email');
+        $form->editor('content','用户介绍');
+        return $form;
+    }
 }
