@@ -40,7 +40,7 @@ class UserController extends Controller{
         $form->text('nick_name', '昵称');
         $form->text('age', '年龄');
         $form->email('email', 'Email');
-        $form->editor('content','用户介绍');
+        $form->editor('content','个人介绍');
         return $form;
     }
 }
