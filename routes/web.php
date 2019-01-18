@@ -42,7 +42,7 @@ Route::get('/goods/allshow','Goods\DetailController@goodsshow');
 Route::get('/order/detail','Order\OrderController@orderdetail');
 Route::post('/order/cancel','Order\OrderController@ordercanno');
 //支付页
-Route::get('/pay/alipay/order/{order_id}','Pay\AlipayController@test')->middleware('check.login.token');
+Route::get('/pay/alipay/order/{order_id}','Pay\AlipayController@test');
 //Route::get('/pay/order/{oid}','Pay\IndexController@order');
 Route::post('/pay/alipay/notify','Pay\AlipayController@notify');//异步通知
 Route::get('/pay/alipay/snyc','Pay\AlipayController@snyc');//同步通知

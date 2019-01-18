@@ -8,12 +8,20 @@ use Encore\Admin\Layout\Row;
 use Encore\Admin\Grid;
 use Encore\Admin\Form;
 use App\Model\Info;
+use Encore\Admin\Show;
 class UserController extends Controller{
     public function index(Content $content){
         return $content
             ->header('用户管理')
             ->description('用户列表')
             ->body($this->grid());
+    }
+    public function edit($id, Content $content)
+    {
+        return $content
+            ->header('Edit')
+            ->description('description')
+            ->body($this->form()->edit($id));
     }
     public function grid(){
         $grid=new Grid(new Info());
@@ -37,10 +45,30 @@ class UserController extends Controller{
     {
         $form = new Form(new Info());
 
-        $form->text('nick_name', '昵称');
+        $form->text('name', '昵称');
         $form->text('age', '年龄');
         $form->email('email', 'Email');
         $form->editor('content','个人介绍');
         return $form;
+    }
+    public function show($id, Content $content)
+    {
+        return $content
+            ->header('Detail')
+            ->description('description')
+            ->body($this->detail($id));
+    }
+    protected function detail($id)
+    {
+        $show = new Show(Info::findOrFail($id));
+
+        $show->id('用户ID');
+        $show->name('用户名');
+        $show->age('年龄');
+        $show->email('邮箱');
+        $show->reg_time('注册时间')->display(function ($time){
+            return date('Y-m-d H:i:s',$time);
+        });
+        return $show;
     }
 }
