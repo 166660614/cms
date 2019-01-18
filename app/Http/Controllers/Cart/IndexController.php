@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\GoodsModel;
 use App\Model\CartModel;
+use Illuminate\Support\Facades\Auth;
 class IndexController extends Controller{
     public function __construct()
     {
@@ -17,7 +18,8 @@ class IndexController extends Controller{
     }
     public function index(Request $request){
             $user_id=session()->get('user_id');
-            if(!empty($user_id)){
+            $is_login = Auth::check();
+            if($is_login){
                 $cart_detail = CartModel::where(['user_id'=>$user_id,'is_delete'=>1])->get()->toArray();
                 //print_r($cart_detail);exit;
                 if(empty($cart_detail)){
@@ -38,7 +40,7 @@ class IndexController extends Controller{
 
             }else{
                 echo '您还没有登录';
-                header('refresh:1;url=/users/login');
+                header('refresh:1;url=/login');
             }
 
 
