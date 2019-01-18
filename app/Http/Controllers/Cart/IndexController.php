@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 use App\Model\GoodsModel;
 use App\Model\CartModel;
 class IndexController extends Controller{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Request $request){
             $user_id=session()->get('user_id');
             if(!empty($user_id)){

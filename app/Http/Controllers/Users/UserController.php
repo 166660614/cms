@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 use App\Model\Info;
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //注册
     public function register(){
         return view('users.reg');

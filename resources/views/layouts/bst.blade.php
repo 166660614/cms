@@ -6,6 +6,8 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
 
     <title>BootStrap</title>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="{{URL::asset('/css/bootstrap.min.css')}}">
 </head>
@@ -31,22 +33,27 @@
                     <li><a href="#">分类2</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    @if(Session::has('user_id'))
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">欢迎{{Session::get('name')}}<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/order/detail">我的订单</a></li>
-                            <li><a href="/users/cart">我的购物车</a></li>
-                        </ul>
+                    @if(!Session::has('user_id'))
+                    <li><a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('退出') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
                     </li>
                     @endif
-                    @if(Session::has('user_id'))
-                    <li><a href="/users/loginout">退出</a></li>
-                    @else
-                    <li><a href="/users/login">登录</a></li>
-                    <li><a href="/users/register">注册</a></li>
-                    @endif
                 </ul>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
     </nav>
@@ -56,6 +63,7 @@
 @section('footer')
     <script src="{{URL::asset('/js/jquery-1.12.4.min.js')}}"></script>
     <script src="{{URL::asset('/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
 @show
 </body>
 </html>
