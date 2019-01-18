@@ -25,6 +25,7 @@
         </tr>
         @endforeach
     </table>
+    {{$orderData->links()}}
 @endsection
 @section('footer')
     @parent

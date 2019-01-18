@@ -19,6 +19,7 @@
         </tr>
          @endforeach
     </table>
+    {{$goodsData->links()}}
 @endsection
 @section('footer')
     @parent

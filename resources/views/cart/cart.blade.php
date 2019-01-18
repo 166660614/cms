@@ -22,7 +22,7 @@
     </tr>
     @endforeach
 </table>
-    <button type="button" class="btn btn-success">批量下单</button>
+   {{-- <button type="button" class="btn btn-success">批量下单</button>--}}
 @endsection
 @section('footer')
     @parent

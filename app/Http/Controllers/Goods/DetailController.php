@@ -22,7 +22,7 @@ class DetailController extends Controller
   }
   //全部商品展示
     public function goodsshow(){
-      $goodsData=GoodsModel::get();
+      $goodsData=GoodsModel::paginate(3);
       $goodslist=[
           'goodsData'=>$goodsData,
       ];

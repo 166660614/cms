@@ -45,7 +45,7 @@ class OrderController extends Controller
     //订单页
     public function orderdetail(){
         $user_id=session()->get('user_id');
-        $orderData=OrderModel::where(['user_id'=>$user_id,'is_delete'=>1])->get();
+        $orderData=OrderModel::where(['user_id'=>$user_id,'is_delete'=>1])->paginate(5);
         $orderlist=[
           'orderData'=>$orderData,
         ];

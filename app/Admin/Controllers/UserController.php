@@ -71,4 +71,25 @@ class UserController extends Controller{
         });
         return $show;
     }
+    //删除
+    public function destroy($id)
+    {
+        $where=[
+            'id'=>$id,
+        ];
+        $res=Info::where($where)->delete();
+        if($res){
+            $response = [
+                'status' => true,
+                'message'   => '删除成功'
+            ];
+            return $response;
+        }else{
+            $response = [
+                'status' => true,
+                'message'   => '删除失败'
+            ];
+            return $response;
+        }
+    }
 }
