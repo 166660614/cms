@@ -24,13 +24,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/users/center">首页</a>
+                <a class="navbar-brand" href="/">首页</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/goods/allshow">全部商品</a></li>
-                    <li><a href="#">分类1</a></li>
-                    <li><a href="#">分类2</a></li>
+                    <li><a href="/goods/allshow">分类1</a></li>
+                    <li><a href="/goods/allshow">分类2</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if(!Session::has('user_id'))
@@ -43,7 +43,8 @@
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('退出') }}
                             </a>
-
+                            <a href="/users/cart" >购物车</a>
+                            <a href="/order/detail" >我的订单</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>

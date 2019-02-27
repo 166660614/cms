@@ -24,7 +24,7 @@ class IndexController extends Controller{
                 //print_r($cart_detail);exit;
                 if(empty($cart_detail)){
                     echo '购物车是空的';
-                    header('refresh:1;url=/users/center');
+                    header('refresh:1;url=/goods/allshow');
                 }else{
                     foreach ($cart_detail as $k=>$v){
                         $goodsInfo= GoodsModel::where(['goods_id'=>$v['goods_id']])->first();

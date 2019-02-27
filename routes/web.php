@@ -11,13 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+    /*Route::get('/', function () {
+        return view('welcome');
+    });*/
 /*Route::get('/', function () {
     echo date('Y-m-d H:i:s');
     //return view('welcome');
 });*/
+//默认访问页
+Route::get('/', 'HomeController@index')->name('home');
 //用户注册
 Route::get('/users/register','Users\UserController@register');
 Route::post('/dousersregister','Users\UserController@doregister');
@@ -47,8 +49,6 @@ Route::get('/pay/alipay/order/{order_id}','Pay\AlipayController@test');
 Route::post('/pay/alipay/notify','Pay\AlipayController@notify');//异步通知
 Route::get('/pay/alipay/snyc','Pay\AlipayController@snyc');//同步通知
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 //微信支付
 Route::get('/weixin/pay/unified/{order_id}','Pay\WxPayController@unifiedOrder');     //微信支付下单
