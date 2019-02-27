@@ -169,6 +169,7 @@ class WxPayController extends Controller
                     //TODO 验签失败
                     echo '验签失败，IP: '.$_SERVER['REMOTE_ADDR'];
                     // TODO 记录日志
+                    file_put_contents('logs/wx_pay_ip.log',$_SERVER['REMOTE_ADDR'],FILE_APPEND);
                 }
     
             }
