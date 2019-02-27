@@ -173,7 +173,7 @@ class WxPayController extends Controller
                 }
     
             }
-    
+            file_put_contents('logs/wx_pay_ip.log',$sign,FILE_APPEND);
             $response = '<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>';
             echo $response;
         }
