@@ -10,7 +10,7 @@
         <td>操作</td>
     </tr>
     @foreach($list as $v)
-    <tr cart_id="{{$v['cart_id']}}" buy_num={{$v['buy_num']}} goods_price={{$v['goods_price']}}>
+    <tr cart_id="{{$v['cart_id']}}" buy_num={{$v['buy_num']}} goods_price={{$v['goods_price']}} goods_id={{$v['goods_id']}}>
         <td>{{$v['goods_name']}}</td>
         <td>{{$v['buy_num']}}</td>
         <td>{{$v['goods_price']}}</td>

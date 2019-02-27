@@ -17,12 +17,14 @@ class OrderController extends Controller
         $buy_num=$request->input('buy_num');
         $cart_id=$request->input('cart_id');
         $goods_price=$request->input('goods_price');
+        $goods_id=$request->input('goods_id');
         $order_amount=$buy_num*$goods_price;
         $user_id=session()->get('user_id');
         $order_number=OrderModel::generateOrderNum();
         $data=[
             'order_number'=>$order_number,
             'user_id'=>$user_id,
+            'goods_id'=>$goods_id,
             'order_amount'=>$order_amount,
             'order_add_time'=>time(),
         ];

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use GuzzleHttp\Client;
 use App\Model\OrderModel;
+use App\Model\GoodsModel;
 class WxPayController extends Controller
 {
     public $weixin_unifiedorder_url = 'https://api.mch.weixin.qq.com/pay/unifiedorder';
@@ -142,12 +143,21 @@ class WxPayController extends Controller
             if($xml->result_code=='SUCCESS' && $xml->return_code=='SUCCESS'){      //微信支付成功回调
                 //验证签名
                 $sign = true;
-    
                 if($sign){       //签名验证成功
                     //TODO 逻辑处理  订单状态更新
-                    $updatedata=[
-                        ''
+                    //订单号
+                    $order_number=$xml->out_trade_no;
+                    $updateWhere=[
+                        'order_number'=>$order_number
                     ];
+                    $updateData=[
+                        'order_status'=>3,
+                        'pay_status'=>2,
+                    ];
+                    OrderModel::where($updateWhere)->update($updateData);
+                    $orderData=OrderModel::where($updateWhere)->first();
+                    $goods_store=GoodsModel::where(['goods_id'=>$orderData['goods_id']])->values('goods_store');
+                    GoodsModel::where(['goods_id'=>$orderData['goods_id']])->update(['goods_store'=>$goods_store-$orderData['order_amount']]);
                 }else{
                     //TODO 验签失败
                     echo '验签失败，IP: '.$_SERVER['REMOTE_ADDR'];

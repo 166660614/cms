@@ -30,6 +30,7 @@ class IndexController extends Controller{
                         $goodsInfo= GoodsModel::where(['goods_id'=>$v['goods_id']])->first();
                         $goodsInfo['buy_num']=$v['buy_num'];
                         $goodsInfo['cart_id']=$v['cart_id'];
+                        $goodsInfo['goods_id']=$v['goods_id'];
                         $list[]=$goodsInfo;
                     }
                         $detail=[
