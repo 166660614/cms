@@ -154,7 +154,7 @@ class WxPayController extends Controller
                 if($sign==$xml['sign']){       //签名验证成功
                     //TODO 逻辑处理  订单状态更新
                     //订单号
-                    $order_number=$xml->out_trade_no;
+                    $order_number=$xml['out_trade_no'];
                     $updateWhere=[
                         'order_number'=>$order_number
                     ];
