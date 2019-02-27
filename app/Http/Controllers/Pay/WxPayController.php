@@ -142,8 +142,8 @@ class WxPayController extends Controller
             $xml = simplexml_load_string($data);
             if($xml->result_code=='SUCCESS' && $xml->return_code=='SUCCESS'){      //微信支付成功回调
                 //验证签名
-                $sign = true;
-                if($sign){       //签名验证成功
+                $sign=$this->SetSign();
+                if($sign==$xml->sign){       //签名验证成功
                     //TODO 逻辑处理  订单状态更新
                     //订单号
                     $order_number=$xml->out_trade_no;
