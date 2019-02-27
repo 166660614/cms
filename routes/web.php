@@ -52,4 +52,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //微信支付
 Route::get('/weixin/pay/unified/{order_id}','Pay\WxPayController@unifiedOrder');     //微信支付下单
-Route::post('/weixin/pay/notify','Pay\OrderController@notify');//微信支付异步回调
+Route::post('/weixin/pay/notify','Pay\WxPayController@notify');//微信支付异步回调
