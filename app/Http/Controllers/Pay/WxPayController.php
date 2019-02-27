@@ -134,6 +134,13 @@ class WxPayController extends Controller
                 die("curl出错，错误码:$error");
             }
         }
+        //验签
+        public function verifySign($xml){
+            $this->values=[];
+            $this->values=$xml;
+            $this->SetSign();
+        }
+
         public function notify(){
             $data=file_get_contents("php://input");
             //记录日志
@@ -142,7 +149,7 @@ class WxPayController extends Controller
             $xml = simplexml_load_string($data);
             if($xml->result_code=='SUCCESS' && $xml->return_code=='SUCCESS'){      //微信支付成功回调
                 //验证签名
-                $sign=$this->SetSign();
+                $sign=$this->verifySign($xml);
                 if($sign==$xml->sign){       //签名验证成功
                     //TODO 逻辑处理  订单状态更新
                     //订单号
