@@ -33,7 +33,7 @@ $('.order_buy').click(function (e) {
         },
         url:'/buy/cart',
         type:'post',
-        data:{buy_num:buy_num,goods_price:goods_price,cart_id:cart2_id},
+        data:{buy_num:buy_num,goods_price:goods_price,cart_id:cart2_id,goods_id:goods_id},
         dataType:'json',
         success:function (res) {
             if(res.error!=301){
