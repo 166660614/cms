@@ -27,6 +27,7 @@ $('.order_buy').click(function (e) {
     var buy_num=_this.parents('tr').attr('buy_num');
     var goods_price=_this.parents('tr').attr('goods_price');
     var cart2_id=_this.parents('tr').attr('cart_id');
+    var goods_id=_this.parents('tr').attr('goods_id');
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
