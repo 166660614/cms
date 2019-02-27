@@ -156,7 +156,7 @@ class WxPayController extends Controller
                     ];
                     OrderModel::where($updateWhere)->update($updateData);
                     $orderData=OrderModel::where($updateWhere)->first();
-                    $goodsData=GoodsModel::where(['goods_id'=>$orderData['goods_id']])->fitst();
+                    $goodsData=GoodsModel::where(['goods_id'=>$orderData['goods_id']])->first();
                     GoodsModel::where(['goods_id'=>$orderData['goods_id']])->update(['goods_store'=>$goodsData['goods_store']-$orderData['order_amount']]);
                 }else{
                     //TODO 验签失败
