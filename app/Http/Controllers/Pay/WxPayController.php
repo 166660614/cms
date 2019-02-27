@@ -21,7 +21,7 @@ class WxPayController extends Controller
                 'nonce_str'=>str_random(16), //随机字符串
                 'sign_type'     => 'MD5',
                 'body'          => '筱川订单-'.mt_rand(1111,9999) . str_random(6),
-                'out_trade_no'  => $order_id,
+                'out_trade_no'  => $orderInfo['order_number'],
                 'total_fee'     => $total_fee,
                 'spbill_create_ip'  => $_SERVER['REMOTE_ADDR'],//客户端ip
                 'notify_url'=>$this->weixin_notify_url,
