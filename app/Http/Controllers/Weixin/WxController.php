@@ -34,7 +34,7 @@ class WxController extends Controller
                 'wx_province'=>$user_arr['province'],
                 'wx_country'=>$user_arr['country'],
                 'wx_headimgurl'=>$user_arr['headimgurl'],
-                'wx_unionid'=>$user_arr['wx_unionid'],
+                'wx_unionid'=>$user_arr['unionid'],
                 'wx_openid'=>$user_arr['openid'],
             ];
             WxUsersModel::where($usersWhere)->update($updatedata);
@@ -48,7 +48,7 @@ class WxController extends Controller
                 'wx_province'=>$user_arr['province'],
                 'wx_country'=>$user_arr['country'],
                 'wx_headimgurl'=>$user_arr['headimgurl'],
-                'wx_unionid'=>$user_arr['wx_unionid'],
+                'wx_unionid'=>$user_arr['unionid'],
                 'wx_openid'=>$user_arr['openid'],
             ];
             $user_id=WxUsersModel::insertId($insertData);
