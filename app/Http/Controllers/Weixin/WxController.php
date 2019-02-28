@@ -24,7 +24,7 @@ class WxController extends Controller
             'wx_openid'=>$user_arr['openid'],
         ];
         $res=WxUsersModel::where($usersWhere)->first();
-        var_dump($res);exit;
+        //var_dump($res);exit;
         if($res){
             //用户已存在
             $updatedata=[
