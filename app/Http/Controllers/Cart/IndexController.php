@@ -12,10 +12,10 @@ use App\Model\GoodsModel;
 use App\Model\CartModel;
 use Illuminate\Support\Facades\Auth;
 class IndexController extends Controller{
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
     public function index(Request $request){
             $user_id=session()->get('user_id');
             $is_login = Auth::check();
@@ -41,7 +41,7 @@ class IndexController extends Controller{
 
             }else{
                 echo '您还没有登录';
-                header('refresh:1;url=/login');
+                header('refresh:1;url=/users/login');
             }
 
 

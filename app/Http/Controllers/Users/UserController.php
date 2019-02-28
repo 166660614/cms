@@ -9,12 +9,13 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Info;
+use Illuminate\Support\Facades\Session;
 class UserController extends Controller
 {
-    public function __construct()
+    /*public function __construct()
     {
-        $this->middleware('auth');
-    }
+        //$this->middleware('auth');
+    }*/
     //注册
     public function register(){
         return view('users.reg');
@@ -58,8 +59,14 @@ class UserController extends Controller
         }
     }
     //登录
-    public function login(){
-        return view('users.login');
+    public function login(Request $request){
+        /*$user_id=Session::has('user_id');
+        var_dump($user_id);exit;*/
+        if(Session::has('user_id')){
+            header('refresh:0.1;url=/goods/allshow');
+        }else{
+            return view('users.login');
+        }
     }
     public function doLogin(Request $request){
         $pwd=$request->input('u_pwd');
@@ -68,10 +75,11 @@ class UserController extends Controller
             'name'=>$name,
         ];
         $res=Info::where($data)->first();
+        var_dump($res);exit;
         if($res){
             if(password_verify($pwd,$res->pwd)){
                 $token=substr(md5(time().mt_rand(1,99999)),10,10);
-                setcookie('token',$token,time()+86400,'/','laravel.com',false,true);
+                setcookie('token',$token,time()+86400,'/','myshop.com',false,true);
                 $request->session()->put('name',$name);
                 $request->session()->put('user_id',$res->id);
                 $request->session()->put('u_token',$token);

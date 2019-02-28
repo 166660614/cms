@@ -11,10 +11,10 @@ use Illuminate\Http\Request;
 use App\Model\GoodsModel;
 class DetailController extends Controller
 {
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware('auth');
-    }
+    }*/
     //商品详情页
   public function detailshow($goods_id){
       $goods_detail=GoodsModel::where(['goods_id'=>$goods_id])->first();

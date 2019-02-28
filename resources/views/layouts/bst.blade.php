@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">首页</a>
+                <a class="navbar-brand" href="/users/center">首页</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -34,29 +34,13 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if(!Session::has('user_id'))
-                    <li><a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('退出') }}
-                            </a>
-                            <a href="/users/cart" >购物车</a>
-                            <a href="/order/detail" >我的订单</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
+                        <a class="btn btn-danger">1</a>
+                    @else
+                        <a class="btn btn-danger">2</a>
                     @endif
                 </ul>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
+            </div>
+        </div>
     </nav>
     @yield('content')
 </div>

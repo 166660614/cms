@@ -9,10 +9,10 @@ use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware('auth');
-    }
+    }*/
     public function orderbuy(Request $request){
         $buy_num=$request->input('buy_num');
         $cart_id=$request->input('cart_id');

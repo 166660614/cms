@@ -56,6 +56,7 @@ class WxController extends Controller
                 'wx_unionid'=>$user_arr['unionid'],
                 'wx_openid'=>$user_arr['openid'],
             ];
+            var_dump($insertData);exit;
             $user_id=WxUsersModel::insertGetId($insertData);
             $request->session()->put('user_id',$user_id);
             header('refresh:2;url=/goods/allshow');

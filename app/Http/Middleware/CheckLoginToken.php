@@ -17,7 +17,7 @@ class CheckLoginToken
     {
         if(!$request->session()->get('u_token')){
             echo "请先登录";
-            header('refresh:2;url=/login');
+            header('refresh:2;url=/users/login');
             exit;
         }
         return $next($request);
