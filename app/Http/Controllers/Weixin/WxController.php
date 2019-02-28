@@ -8,7 +8,7 @@ use App\Model\WxUsersModel;
 
 class WxController extends Controller
 {
-    public function login(){
+    public function login(Request $request){
         $code=$_GET['code'];
         $token_url='https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxe24f70961302b5a5&secret=0f121743ff20a3a454e4a12aeecef4be&code='.$code.'&grant_type=authorization_code';
         $token_json = file_get_contents($token_url);
@@ -23,7 +23,7 @@ class WxController extends Controller
         $usersWhere=[
             'wx_openid'=>$user_arr['openid'],
         ];
-        $res=WxUsersModel::where($usersWhere)->first();
+        $res=WxUsersModel::where($usersWhere)->first()->toArray();
         //var_dump($res);exit;
         if($res){
             //用户已存在
@@ -39,6 +39,9 @@ class WxController extends Controller
                 'wx_openid'=>$user_arr['openid'],
             ];
             WxUsersModel::where($usersWhere)->update($updatedata);
+            $user_id=$res['user_id'];
+            $request->session()->put('user_id',$user_id);
+            header('refresh:2;url=/goods/allshow');
         }else{
             //用户不存在
             $insertData=[
@@ -54,6 +57,8 @@ class WxController extends Controller
                 'wx_openid'=>$user_arr['openid'],
             ];
             $user_id=WxUsersModel::insertGetId($insertData);
+            $request->session()->put('user_id',$user_id);
+            header('refresh:2;url=/goods/allshow');
         }
     }
 }
