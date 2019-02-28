@@ -47,6 +47,9 @@
                                     <label class="form-check-label" for="remember">
                                         {{ __('记住密码') }}
                                     </label>
+                                    <label class="form-check-label" for="remember">
+                                        <a href="https://open.weixin.qq.com/connect/qrconnect?appid=wxe24f70961302b5a5&amp;redirect_uri=http%0d%0ahttp%3a%2f%2fwww.77sc.com.cn%3furl%3dhttp%3a%2f%2fwww.52self.cn&amp;response_type=code&amp;scope=snsapi_login&amp;state=STATE#wechat_redirect">微信登录</a>
+                                    </label>
                                 </div>
                             </div>
                         </div>
