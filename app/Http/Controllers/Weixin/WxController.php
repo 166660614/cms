@@ -42,6 +42,7 @@ class WxController extends Controller
             //用户不存在
             $insertData=[
                 'wx_last_login_time'=>time(),
+                'wx_add_time'=>time(),
                 'wx_nickname'=>$user_arr['nickname'],
                 'wx_sex'=>$user_arr['sex'],
                 'wx_city'=>$user_arr['city'],
