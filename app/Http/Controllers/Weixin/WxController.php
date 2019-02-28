@@ -23,7 +23,7 @@ class WxController extends Controller
         $usersWhere=[
             'wx_openid'=>$user_arr['openid'],
         ];
-        $res=WxUsersModel::where($usersWhere)->first()->toArray();
+        $res=WxUsersModel::where($usersWhere)->first();
         //var_dump($res);exit;
         if($res){
             //用户已存在
