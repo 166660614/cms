@@ -21,7 +21,7 @@ class WxController extends Controller
         $user_arr = json_decode($user_json,true);
         //用户信息存数据库
         $usersWhere=[
-            'wx_unionid'=>$user_arr['unionid'],
+            'wx_openid'=>$user_arr['openid'],
         ];
         $res=WxUsersModel::where($usersWhere)->first();
         var_dump($res);exit;
