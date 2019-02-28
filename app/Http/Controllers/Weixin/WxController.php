@@ -51,7 +51,7 @@ class WxController extends Controller
                 'wx_unionid'=>$user_arr['unionid'],
                 'wx_openid'=>$user_arr['openid'],
             ];
-            $user_id=WxUsersModel::insertId($insertData);
+            $user_id=WxUsersModel::insertGetId($insertData);
         }
     }
 }
