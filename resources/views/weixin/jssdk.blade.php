@@ -1,9 +1,3 @@
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2019/3/1 0001
- * Time: 11:23
- */
 @extends('layouts.bst')
 @section('content')
     <div class="container">
