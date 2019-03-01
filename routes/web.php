@@ -49,7 +49,8 @@ Route::get('/pay/alipay/order/{order_id}','Pay\AlipayController@test');
 Route::post('/pay/alipay/notify','Pay\AlipayController@notify');//异步通知
 Route::get('/pay/alipay/snyc','Pay\AlipayController@snyc');//同步通知
 Auth::routes();
-
+//微信token
+Route::get('/weixin/get/token','Weixin\WxController@getWXAccessToken');
 //微信支付
 Route::get('/weixin/pay/unified/{order_id}','Pay\WxPayController@unifiedOrder');     //微信支付下单
 Route::post('/weixin/pay/notify','Pay\WxPayController@notify');//微信支付异步回调

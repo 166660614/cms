@@ -6,9 +6,12 @@ use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\WxUsersModel;
+use Illuminate\Support\Facades\Redis;
 
 class WxController extends Controller
 {
+    protected $redis_weixin_access_token = 'str:weixin_access_token';     //微信 access_token
+    protected $redis_weixin_jsapi_ticket = 'str:weixin_jsapi_ticket';     //微信 jsapi_ticket
     public function login(Request $request){
         $code=$_GET['code'];
         $token_url='https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxe24f70961302b5a5&secret=0f121743ff20a3a454e4a12aeecef4be&code='.$code.'&grant_type=authorization_code';
@@ -65,15 +68,59 @@ class WxController extends Controller
     }
     public function jssdk(){
         $data=[
-            'sign'=>$this->WxJsConfigSign(),
             'nocestr'=>str_random(10),
             'timestamp'=>time(),
             'appid'=>env('WEIXIN_JSSDK_APPID'),
         ];
+        $sign = $this->wxJsConfigSign($data);
+        $data['sign'] = $sign;
         return view('weixin.jssdk',$data);
     }
-    public function WxJsConfigSign(){
-        $sign=str_random(10);
-        return $sign;
+    /*
+     * 计算jssdk sign
+     */
+    public function wxJsConfigSign($param){
+        $current_url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];     //当前调用 jsapi的 url
+        $ticket=$this->getJsapiTicket();
+        $str =  'jsapi_ticket='.$ticket.'&noncestr='.$param['noncestr']. '&timestamp='. $param['timestamp']. '&url='.$current_url;
+        $signature=sha1($str);
+        return $signature;
+    }
+    public function getJsapiTicket()
+    {
+
+        //是否有缓存
+        $ticket = Redis::get($this->redis_weixin_jsapi_ticket);
+        if(!$ticket){           // 无缓存 请求接口
+            $access_token = '';
+            $ticket_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$access_token.'&type=jsapi';
+            $ticket_info = file_get_contents($ticket_url);
+            $ticket_arr = json_decode($ticket_info,true);
+
+            if(isset($ticket_arr['ticket'])){
+                $ticket = $ticket_arr['ticket'];
+                Redis::set($this->redis_weixin_jsapi_ticket,$ticket);
+                Redis::setTimeout($this->redis_weixin_jsapi_ticket,3600);       //设置过期时间 3600s
+            }
+        }
+        return $ticket;
+
+    }
+    public function getWXAccessToken()
+    {
+
+        //获取缓存
+        $token = Redis::get($this->redis_weixin_access_token);
+        if(!$token){        // 无缓存 请求微信接口
+            $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.env('WEIXIN_APPID').'&secret='.env('WEIXIN_APPSECRET');
+            $data = json_decode(file_get_contents($url),true);
+
+            //记录缓存
+            $token = $data['access_token'];
+            Redis::set($this->redis_weixin_access_token,$token);
+            Redis::setTimeout($this->redis_weixin_access_token,3600);
+        }
+        return $token;
+
     }
 }
