@@ -33,11 +33,11 @@
                     <li><a href="/goods/allshow">分类2</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    @if(!Session::has('user_id'))
-                        <a class="btn btn-danger">1</a>
-                    @else
-                        <a class="btn btn-danger">2</a>
-                    @endif
+                    {{--@if(!Session::has('user_id'))--}}
+                        {{--<a class="btn btn-danger">1</a>--}}
+                    {{--@else--}}
+                        {{--<a class="btn btn-danger">2</a>--}}
+                    {{--@endif--}}
                 </ul>
             </div>
         </div>

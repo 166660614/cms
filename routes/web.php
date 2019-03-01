@@ -55,3 +55,5 @@ Route::get('/weixin/pay/unified/{order_id}','Pay\WxPayController@unifiedOrder');
 Route::post('/weixin/pay/notify','Pay\WxPayController@notify');//微信支付异步回调
 //微信登录
 Route::get('/weixin/login','Weixin\WxController@login');
+//测试jssdk
+Route::get('/weixin/jssdk/test','Weixin\WxController@jssdk');

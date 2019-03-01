@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Weixin;
 
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\WxUsersModel;
@@ -61,5 +62,18 @@ class WxController extends Controller
             $request->session()->put('user_id',$user_id);
             header('refresh:2;url=/goods/allshow');
         }
+    }
+    public function jssdk(){
+        $data=[
+            'sign'=>$this->WxJsConfigSign(),
+            'nocestr'=>str_random(10),
+            'timestamp'=>time(),
+            'appid'=>env('WEIXIN_JSSDK_APPID'),
+        ];
+        return view('weixin.jssdk',$data);
+    }
+    public function WxJsConfigSign(){
+        $sign=str_random(10);
+        return $sign;
     }
 }
