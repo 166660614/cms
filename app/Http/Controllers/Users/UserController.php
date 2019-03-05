@@ -75,7 +75,6 @@ class UserController extends Controller
             'name'=>$name,
         ];
         $res=Info::where($data)->first();
-        var_dump($res);exit;
         if($res){
             if(password_verify($pwd,$res->pwd)){
                 $token=substr(md5(time().mt_rand(1,99999)),10,10);
