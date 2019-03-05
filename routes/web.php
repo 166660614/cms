@@ -19,7 +19,7 @@
     //return view('welcome');
 });*/
 //默认访问页
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'Users\UserController@login');
 //用户注册
 Route::get('/users/register','Users\UserController@register');
 Route::post('/dousersregister','Users\UserController@doregister');
