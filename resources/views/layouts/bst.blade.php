@@ -33,11 +33,7 @@
                     <li><a href="/goods/allshow">分类2</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    {{--@if(!Session::has('user_id'))--}}
-                        {{--<a class="btn btn-danger">1</a>--}}
-                    {{--@else--}}
-                        {{--<a class="btn btn-danger">2</a>--}}
-                    {{--@endif--}}
+                    <li><a href="http://chat.52self.cn">畅聊室</a></li>
                 </ul>
             </div>
         </div>
