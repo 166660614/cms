@@ -34,6 +34,15 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="http://chat.52self.cn">畅聊室</a></li>
+                    @if(Session::has('user_id'))
+                        <li>
+                            <a href="">欢迎$_SESSION['name']登录</a>
+                            <a href="/users/loginout">退出</a>
+                        </li>
+                    @else
+                        <li><a href="/users/login">登录</a></li>
+                        <li><a href="/users/register">注册</a></li>
+                    @endif
                 </ul>
             </div>
         </div>
